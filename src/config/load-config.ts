@@ -1,5 +1,5 @@
 import jiti from "jiti";
-import { Config } from "../interfaces/config.interface";
+import { UserConfig } from "../interfaces/config.interface";
 import { searchConfig } from "./search-config";
 
 export function loadConfig(rootDir: string) {
@@ -7,7 +7,7 @@ export function loadConfig(rootDir: string) {
     const foundConfig = searchConfig(rootDir);
 
     try {
-        return _require(foundConfig.path!) as Config;
+        return _require(foundConfig.path!) as UserConfig;
     } catch (err) {
         console.error(`Config file not found in ${rootDir}`, err);
         process.exit(1);
