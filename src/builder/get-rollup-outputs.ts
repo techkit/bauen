@@ -4,6 +4,8 @@ import { defineOutput } from "../utils";
 
 const outputMapping = new Map<string, OutputOptions>();
 
+export const getRollupOutput = (id: string) => outputMapping.get(id);
+
 export function getRollupOutputs(options: BauenOptions): OutputOptions[] {
     _registerDefaultOutputs(options.outDir);
     return options.outputs.map(out => _resolveOutput(out));
@@ -19,7 +21,7 @@ function _registerDefaultOutputs(outDir: string) {
     const cjsOutput = defineOutput({
         dir: outDir,
         entryFileNames: "[name].js",
-        chunkFileNames: "chunks/[name].[hash].js",
+        chunkFileNames: "chunks/[hash].js",
         format: "cjs",
         exports: "auto",
         preferConst: true,
@@ -30,7 +32,7 @@ function _registerDefaultOutputs(outDir: string) {
     const esmOutput = defineOutput({
         dir: outDir,
         entryFileNames: "[name].mjs",
-        chunkFileNames: "chunks/[name].[hash].mjs",
+        chunkFileNames: "chunks/[hash].mjs",
         format: "esm",
         exports: "auto",
         preferConst: true,
@@ -38,8 +40,14 @@ function _registerDefaultOutputs(outDir: string) {
         freeze: false
     });
 
+    const dtsOutput = defineOutput({
+        dir: outDir,
+        format: "esm"
+    });
+
     registerOutput("cjs", cjsOutput);
     registerOutput("esm", esmOutput);
+    registerOutput("dts", dtsOutput);
 }
 
 function _resolveOutput(output: OutputType | OutputOptions) {

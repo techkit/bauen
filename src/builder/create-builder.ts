@@ -1,5 +1,6 @@
 import { OutputOptions, rollup, RollupOptions, RollupOutput } from "rollup";
 import dts from "rollup-plugin-dts";
+import { getRollupOutput } from "./get-rollup-outputs";
 
 export async function createBuilder(rollupOptions: RollupOptions, declaration?: boolean) {
     const parallelBuilds: Promise<RollupOutput>[] = [];
@@ -16,7 +17,8 @@ export async function createBuilder(rollupOptions: RollupOptions, declaration?: 
     if (declaration) {
         rollupOptions.plugins?.push(dts({}));
         const typesBuild = await rollup(rollupOptions);
-        const typesWritter = typesBuild.write({});
+        const typesOptions = getRollupOutput("dts") as OutputOptions;
+        const typesWritter = typesBuild.write(typesOptions);
         parallelBuilds.push(typesWritter);
     }
 

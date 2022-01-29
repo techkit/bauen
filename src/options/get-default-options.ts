@@ -1,3 +1,4 @@
+import Module from "module";
 import { BauenOptions } from "../interfaces";
 
 export function getDefaultOptions(): BauenOptions {
@@ -7,6 +8,9 @@ export function getDefaultOptions(): BauenOptions {
         outDir: "dist",
         entries: [],
         outputs: [],
-        declaration: true
+        declaration: true,
+        target: "node",
+        extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".jsx", ".json"],
+        externals: [...Module.builtinModules]
     };
 }
