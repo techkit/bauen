@@ -39,7 +39,9 @@
         "jiti": "^1.12.15",
         "lodash.merge": "^4.6.2",
         "mri": "^1.2.0",
-        "pathe": "^0.2.0"
+        "pathe": "^0.2.0",
+        "rollup": "^2.66.1",
+        "rollup-plugin-dts": "^4.1.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^16.1.0",

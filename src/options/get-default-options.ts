@@ -5,6 +5,8 @@ export function getDefaultOptions(): BauenOptions {
         command: "build",
         rootDir: process.cwd(),
         outDir: "dist",
-        entries: []
+        entries: [],
+        outputs: [],
+        declaration: true
     };
 }
