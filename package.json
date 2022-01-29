@@ -36,12 +36,13 @@
         "commit-msg": "commitlint -e -V"
     },
     "dependencies": {
-        "jiti": "^1.12.15"
+        "jiti": "^1.12.15",
+        "pathe": "^0.2.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^16.1.0",
         "@release-it/conventional-changelog": "^4.1.0",
-        "@techkit/linter-config": "^0.3.0",
+        "@techkit/linter-config": "^0.3.1",
         "eslint": "^8.8.0",
         "prettier": "^2.5.1",
         "release-it": "^14.12.4",
