@@ -1,5 +1,5 @@
 {
-    "name": "@techkit/bauen",
+    "name": "bauen",
     "version": "0.0.0",
     "license": "MIT",
     "description": "A javascript build system for libraries",
@@ -23,7 +23,7 @@
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "bin": {
-        "build": "./dist/cli.mjs"
+        "bauen": "./dist/cli.mjs"
     },
     "files": [
         "dist"
