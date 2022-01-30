@@ -38,13 +38,13 @@ function _createExternalFilter(options: BauenOptions) {
         const packageName = _getPackageName(id);
         const isExternal = options.externals.includes(packageName);
 
-        if (id.startsWith(".") || id.startsWith("/")) {
+        if (options.inlineDependencies || id.startsWith(".") || id.startsWith("/")) {
             return false;
         }
 
-        if (!isExternal) {
-            console.warn(`Inlining implicit external ${id}`);
-        }
+        // if (!isExternal) {
+        //     console.warn(`Inlining implicit external ${id}`);
+        // }
 
         return isExternal;
     };

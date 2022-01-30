@@ -7,9 +7,10 @@ export function getDefaultOptions(): BauenOptions {
         outDir: "dist",
         entries: [],
         outputs: [],
-        declaration: true,
         target: "node",
         extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".jsx"],
-        externals: []
+        externals: [],
+        declaration: true,
+        inlineDependencies: false
     };
 }

@@ -18,10 +18,11 @@ export interface Config {
     outDir: string;
     entries: string[];
     outputs: Array<OutputType | OutputOptions>;
-    declaration: boolean;
     target: OutputTarget;
     extensions: string[];
     externals: string[];
+    declaration: boolean;
+    inlineDependencies?: boolean;
     rollupOptions?: RollupOptions;
     rollupPlugins?: PluginsConfig;
 }
