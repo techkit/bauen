@@ -30,6 +30,7 @@
     ],
     "scripts": {
         "build": "jiti ./src/cli",
+        "watch": "jiti ./src/cli watch",
         "release": "release-it"
     },
     "gitHooks": {

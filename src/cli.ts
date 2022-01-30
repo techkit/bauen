@@ -1,4 +1,4 @@
-import { build } from "./commands";
+import { build, watch } from "./commands";
 import { loadConfig } from "./config";
 import { getOptions } from "./options";
 
@@ -6,7 +6,11 @@ async function main() {
     const config = loadConfig(process.cwd());
     const options = await getOptions(process.argv, config);
 
-    await build(options);
+    if (options.command === "build") {
+        await build(options);
+    } else if (options.command === "watch") {
+        await watch(options);
+    }
 }
 
 main().catch(err => {

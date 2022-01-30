@@ -5,5 +5,5 @@ import { remove } from "../utils";
 export async function build(options: BauenOptions) {
     const rollupOptions = getRollupOptions(options);
     await remove(options.outDir);
-    return createBuilder(rollupOptions, options.declaration);
+    return createBuilder(options, rollupOptions);
 }
