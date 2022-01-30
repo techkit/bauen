@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { resolve } from "pathe";
-import { PackageJson } from "../interfaces/package-json.interface";
+import { PackageJson } from "../interfaces";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let packageJson: PackageJson = {} as any;

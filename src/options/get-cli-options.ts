@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mri from "mri";
-import { CliOptions } from "../interfaces/options.interface";
+import { CliOptions } from "../interfaces";
 
 export function getCliOptions(argv: string[]): CliOptions {
     const args = mri([...argv].splice(2), {});

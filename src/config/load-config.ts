@@ -1,5 +1,5 @@
 import jiti from "jiti";
-import { UserConfig } from "../interfaces/config.interface";
+import { UserConfig } from "../interfaces";
 import { searchConfig } from "./search-config";
 
 export function loadConfig(rootDir: string) {

@@ -2,11 +2,11 @@ import { existsSync } from "fs";
 import { resolve } from "pathe";
 
 const configNames = new Set([
-    ".buildrc.js",
-    ".buildrc.cjs",
-    ".buildrc.mjs",
-    ".buildrc.ts",
-    "build.config.ts"
+    ".bauenrc.js",
+    ".bauenrc.cjs",
+    ".bauenrc.mjs",
+    ".bauenrc.ts",
+    "bauen.config.ts"
 ]);
 
 export function searchConfig(rootDir: string) {
