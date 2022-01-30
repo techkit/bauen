@@ -47,7 +47,7 @@ function _registerDefaultOutputs(outDir: string) {
 
     registerOutput("cjs", cjsOutput);
     registerOutput("esm", esmOutput);
-    registerOutput("dts", dtsOutput);
+    registerOutput("__dts__", dtsOutput);
 }
 
 function _resolveOutput(output: OutputType | OutputOptions) {

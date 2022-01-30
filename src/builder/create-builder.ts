@@ -17,7 +17,7 @@ export async function createBuilder(rollupOptions: RollupOptions, declaration?: 
     if (declaration) {
         rollupOptions.plugins?.push(dts({}));
         const typesBuild = await rollup(rollupOptions);
-        const typesOptions = getRollupOutput("dts") as OutputOptions;
+        const typesOptions = getRollupOutput("__dts__") as OutputOptions;
         const typesWritter = typesBuild.write(typesOptions);
         parallelBuilds.push(typesWritter);
     }
