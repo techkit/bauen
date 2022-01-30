@@ -1,6 +1,11 @@
-import { OutputOptions } from "rollup";
+import { RollupAliasOptions } from "@rollup/plugin-alias";
+import { RollupCommonJSOptions } from "@rollup/plugin-commonjs";
+import { RollupNodeResolveOptions } from "@rollup/plugin-node-resolve";
+import { RollupReplaceOptions } from "@rollup/plugin-replace";
+import { OutputOptions, RollupOptions } from "rollup";
+import { Options as RollupEsbuildOptions } from "rollup-plugin-esbuild";
 
-type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
+export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
 export type UserConfig = DeepPartial<Config>;
 
@@ -17,4 +22,14 @@ export interface Config {
     target: OutputTarget;
     extensions: string[];
     externals: string[];
+    rollupOptions?: RollupOptions;
+    rollupPlugins?: PluginsConfig;
+}
+
+export interface PluginsConfig {
+    replace?: RollupReplaceOptions;
+    alias?: RollupAliasOptions;
+    resolve?: RollupNodeResolveOptions;
+    esbuild?: RollupEsbuildOptions;
+    commonjs?: RollupCommonJSOptions;
 }

@@ -9,21 +9,28 @@ import { BauenOptions } from "../interfaces";
 export function getRollupPlugins(options: BauenOptions): Plugin[] {
     return [
         replace({
-            preventAssignment: true
+            preventAssignment: true,
+            ...options.rollupPlugins?.replace
         }),
-        alias({}),
+        alias({
+            ...options.rollupPlugins?.alias
+        }),
         resolve({
             mainFields: ["module", "jsnext", "main"],
             browser: options.target === "browser",
             extensions: options.extensions,
             exportConditions: [options.target === "node" ? "node" : "browser"],
-            preferBuiltins: options.target === "node"
+            preferBuiltins: options.target === "node",
+            ...options.rollupPlugins?.resolve
         }),
-        esbuild({}),
+        esbuild({
+            ...options.rollupPlugins?.esbuild
+        }),
         commonjs({
             include: [/node_modules/],
             extensions: options.extensions,
-            requireReturnsDefault: "namespace"
+            requireReturnsDefault: "namespace",
+            ...options.rollupPlugins?.commonjs
         })
     ];
 }
