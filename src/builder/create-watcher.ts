@@ -1,4 +1,4 @@
-import { OutputOptions, RollupOptions, watch } from "rollup";
+import { OutputOptions, RollupOptions, RollupWatcherEvent, watch } from "rollup";
 
 export function createWatcher(rollupOptions: RollupOptions) {
     if (Array.isArray(rollupOptions.output)) {
@@ -9,20 +9,22 @@ export function createWatcher(rollupOptions: RollupOptions) {
 
     const watcher = watch(rollupOptions);
 
-    watcher.on("event", event => {
-        if (event.code === "BUNDLE_START") {
-            console.info("Build started...");
-        } else if (event.code === "BUNDLE_END") {
-            event.result.close();
-            console.info(`Built in ${event.duration}ms.`);
-        } else if (event.code === "ERROR") {
-            console.error(event.error.message);
-        }
-    });
+    watcher.on("event", _onEventHandler);
 
     watcher.close();
 
     return watcher;
+}
+
+function _onEventHandler(event: RollupWatcherEvent) {
+    if (event.code === "BUNDLE_START") {
+        console.info("Build started...");
+    } else if (event.code === "BUNDLE_END") {
+        event.result.close();
+        console.info(`Built in ${event.duration}ms.`);
+    } else if (event.code === "ERROR") {
+        console.error(event.error.message);
+    }
 }
 
 function _transformOutput(outputOptions: OutputOptions) {
