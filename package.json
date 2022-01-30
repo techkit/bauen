@@ -13,24 +13,21 @@
     "publishConfig": {
         "access": "public"
     },
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/index.mjs",
             "require": "./dist/index.cjs"
         }
     },
-    "main": "./dist/index.cjs",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "bin": {
-        "bauen": "./dist/cli.mjs"
-    },
+    "bin": "./bin/bauen.mjs",
     "files": [
+        "bin",
         "dist"
     ],
     "scripts": {
         "build": "jiti ./src/cli",
-        "watch": "jiti ./src/cli watch",
         "release": "release-it"
     },
     "gitHooks": {

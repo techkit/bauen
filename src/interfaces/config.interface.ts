@@ -21,7 +21,7 @@ export interface Config {
     target: OutputTarget;
     extensions: string[];
     externals: string[];
-    declaration: boolean;
+    declaration?: boolean;
     inlineDependencies?: boolean;
     rollupOptions?: RollupOptions;
     rollupPlugins?: PluginsConfig;
