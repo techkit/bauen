@@ -17,7 +17,7 @@ export interface Config {
     rootDir: string;
     outDir: string;
     entries: string[];
-    outputs: OutputType[] | OutputOptions[];
+    outputs: Array<OutputType | OutputOptions>;
     declaration: boolean;
     target: OutputTarget;
     extensions: string[];
