@@ -6,6 +6,9 @@ const configNames = new Set([
     ".bauenrc.cjs",
     ".bauenrc.mjs",
     ".bauenrc.ts",
+    "bauen.config.js",
+    "bauen.config.cjs",
+    "bauen.config.mjs",
     "bauen.config.ts"
 ]);
 
