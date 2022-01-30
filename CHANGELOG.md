@@ -1,3 +1,10 @@
+# 0.2.0 (2022-01-30)
+
+
+### Features
+
+* watch command created, warn handler and external filter added to rollup options ([f1ece64](https://github.com/techkit/bauen/commit/f1ece648c3a2495d95da8e85d91cb65348a7e944))
+
 # 0.1.0 (2022-01-30)
 
 
