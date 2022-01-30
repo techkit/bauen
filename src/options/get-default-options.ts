@@ -9,7 +9,7 @@ export function getDefaultOptions(): BauenOptions {
         outputs: [],
         declaration: true,
         target: "node",
-        extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".jsx", ".json"],
+        extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".jsx"],
         externals: []
     };
 }
