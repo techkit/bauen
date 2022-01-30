@@ -20,8 +20,8 @@ export function registerOutput(id: string, output: OutputOptions, force?: boolea
 function _registerDefaultOutputs(outDir: string) {
     const cjsOutput = defineOutput({
         dir: outDir,
-        entryFileNames: "[name].js",
-        chunkFileNames: "chunks/[hash].js",
+        entryFileNames: "[name].cjs",
+        chunkFileNames: "chunks/[hash].cjs",
         format: "cjs",
         exports: "auto",
         preferConst: true,

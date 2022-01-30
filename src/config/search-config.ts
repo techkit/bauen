@@ -1,7 +1,7 @@
 import { existsSync } from "fs";
 import { resolve } from "pathe";
 
-export const configNames = new Set([
+const configNames = new Set([
     ".buildrc.js",
     ".buildrc.cjs",
     ".buildrc.mjs",
