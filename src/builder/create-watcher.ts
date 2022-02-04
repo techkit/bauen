@@ -1,6 +1,7 @@
 import { OutputOptions, RollupOptions, RollupWatcherEvent, watch } from "rollup";
+import { BauenOptions } from "../interfaces";
 
-export function createWatcher(rollupOptions: RollupOptions) {
+export function createWatcher(options: BauenOptions, rollupOptions: RollupOptions) {
     if (Array.isArray(rollupOptions.output)) {
         rollupOptions.output = rollupOptions.output.map(out => _transformOutput(out));
     }
@@ -9,22 +10,25 @@ export function createWatcher(rollupOptions: RollupOptions) {
 
     const watcher = watch(rollupOptions);
 
-    watcher.on("event", _onEventHandler);
+    watcher.on("event", _createOnEventHandler(options));
 
     watcher.close();
 
     return watcher;
 }
 
-function _onEventHandler(event: RollupWatcherEvent) {
-    if (event.code === "BUNDLE_START") {
-        console.info("Build started...");
-    } else if (event.code === "BUNDLE_END") {
-        event.result.close();
-        console.info(`Built in ${event.duration}ms.`);
-    } else if (event.code === "ERROR") {
-        console.error(event.error.message);
-    }
+function _createOnEventHandler(options: BauenOptions) {
+    return (event: RollupWatcherEvent) => {
+        if (event.code === "BUNDLE_START") {
+            console.info("Build started...");
+        } else if (event.code === "BUNDLE_END") {
+            event.result.close();
+            options.onBundleEnd?.();
+            console.info(`Built in ${event.duration}ms.`);
+        } else if (event.code === "ERROR") {
+            console.error(event.error.message);
+        }
+    };
 }
 
 function _transformOutput(outputOptions: OutputOptions) {

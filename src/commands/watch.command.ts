@@ -5,5 +5,5 @@ import { remove } from "../utils";
 export async function watch(options: BauenOptions) {
     const rollupOptions = getRollupOptions(options, true);
     await remove(options.outDir);
-    return createWatcher(rollupOptions);
+    return createWatcher(options, rollupOptions);
 }

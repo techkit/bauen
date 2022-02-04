@@ -23,6 +23,7 @@ export interface Config {
     externals: string[];
     declaration?: boolean;
     inlineDependencies?: boolean;
+    onBundleEnd?: () => void;
     rollupOptions?: RollupOptions;
     rollupPlugins?: PluginsConfig;
 }

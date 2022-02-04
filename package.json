@@ -13,6 +13,7 @@
     "publishConfig": {
         "access": "public"
     },
+    "bin": "./bin/bauen.mjs",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "exports": {
@@ -21,7 +22,6 @@
             "require": "./dist/index.cjs"
         }
     },
-    "bin": "./bin/bauen.mjs",
     "files": [
         "bin",
         "dist"
