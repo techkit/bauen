@@ -1,3 +1,10 @@
+# 0.3.0 (2022-02-04)
+
+
+### Features
+
+* **watch:** on bundle end hook added to config ([310df0f](https://github.com/techkit/bauen/commit/310df0f17f77c7319325e1febbcd6b56680ff048))
+
 ## 0.2.4 (2022-01-30)
 
 ## 0.2.3 (2022-01-30)
