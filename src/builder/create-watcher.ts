@@ -18,12 +18,13 @@ export function createWatcher(options: BauenOptions, rollupOptions: RollupOption
 }
 
 function _createOnEventHandler(options: BauenOptions) {
-    return (event: RollupWatcherEvent) => {
+    return async (event: RollupWatcherEvent) => {
         if (event.code === "BUNDLE_START") {
+            await options.onBundleStart?.();
             console.info("Build started...");
         } else if (event.code === "BUNDLE_END") {
             event.result.close();
-            options.onBundleEnd?.();
+            await options.onBundleEnd?.();
             console.info(`Built in ${event.duration}ms.`);
         } else if (event.code === "ERROR") {
             console.error(event.error.message);
