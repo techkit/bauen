@@ -1,3 +1,10 @@
+# 0.4.0 (2022-02-05)
+
+
+### Features
+
+* on bundle start hook added to config ([170ef8d](https://github.com/techkit/bauen/commit/170ef8db4bd7dd230992ed779ee978e83acde990))
+
 # 0.3.0 (2022-02-04)
 
 
