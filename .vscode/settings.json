@@ -1,6 +1,7 @@
 {
     "files.exclude": {
         "**/.git": true,
+        "**/.swc": true,
         "**/.DS_Store": true,
         "**/node_modules": true
     },

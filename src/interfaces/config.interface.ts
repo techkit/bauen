@@ -2,8 +2,8 @@ import { RollupAliasOptions } from "@rollup/plugin-alias";
 import { RollupCommonJSOptions } from "@rollup/plugin-commonjs";
 import { RollupNodeResolveOptions } from "@rollup/plugin-node-resolve";
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
+import { Options as SWCOptions } from "@swc/core";
 import { OutputOptions, RollupOptions } from "rollup";
-import { Options as RollupEsbuildOptions } from "rollup-plugin-esbuild";
 
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
@@ -12,6 +12,8 @@ export type UserConfig = DeepPartial<Config>;
 export type OutputType = "cjs" | "esm";
 
 export type OutputTarget = "node" | "browser";
+
+export type PluginSWCOptions = Omit<SWCOptions, "filename">;
 
 export interface Config {
     rootDir: string;
@@ -33,6 +35,6 @@ export interface PluginsConfig {
     replace?: RollupReplaceOptions;
     alias?: RollupAliasOptions;
     resolve?: RollupNodeResolveOptions;
-    esbuild?: RollupEsbuildOptions;
+    swc?: PluginSWCOptions;
     commonjs?: RollupCommonJSOptions;
 }

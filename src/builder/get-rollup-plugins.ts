@@ -3,7 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import { Plugin } from "rollup";
-import esbuild from "rollup-plugin-esbuild";
+import swc from "unplugin-swc";
 import { BauenOptions } from "../interfaces";
 
 export function getRollupPlugins(options: BauenOptions): Plugin[] {
@@ -23,8 +23,8 @@ export function getRollupPlugins(options: BauenOptions): Plugin[] {
             preferBuiltins: options.target === "node",
             ...options.rollupPlugins?.resolve
         }),
-        esbuild({
-            ...options.rollupPlugins?.esbuild
+        swc.rollup({
+            ...options.rollupPlugins?.swc
         }),
         commonjs({
             include: [/node_modules/],
