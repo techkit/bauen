@@ -1,3 +1,10 @@
+# 0.5.0 (2022-02-10)
+
+
+### Features
+
+* esbuild replaced by swc ([497af8a](https://github.com/techkit/bauen/commit/497af8a9f58d2aa1ac72602604788db7ae7bd672))
+
 # 0.4.0 (2022-02-05)
 
 
