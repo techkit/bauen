@@ -1,3 +1,10 @@
+# 0.6.0 (2022-02-12)
+
+
+### Features
+
+* swc plugin replaced ([622a44b](https://github.com/techkit/bauen/commit/622a44b0a7d0cbb42e0ccd0a8b3ee4d8915d22a6))
+
 # 0.5.0 (2022-02-10)
 
 
