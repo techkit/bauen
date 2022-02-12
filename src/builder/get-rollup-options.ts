@@ -4,18 +4,20 @@ import { BauenOptions } from "../interfaces";
 import { getRollupOutputs } from "./get-rollup-outputs";
 import { getRollupPlugins } from "./get-rollup-plugins";
 
-export function getRollupOptions(options: BauenOptions, watch?: boolean): RollupOptions {
+export async function getRollupOptions(options: BauenOptions, watch?: boolean) {
+    const rollupPlugins = await getRollupPlugins(options);
+
     const defaultOptions: RollupOptions = {
         context: options.rootDir,
         input: options.entries,
         output: getRollupOutputs(options),
-        plugins: getRollupPlugins(options),
+        plugins: rollupPlugins,
         watch: watch && _getWatchOptions(),
         external: _createExternalFilter(options),
         onwarn: _createWarnHandler()
     };
 
-    return merge(defaultOptions, options.rollupOptions);
+    return merge(defaultOptions, options.rollupOptions) as RollupOptions;
 }
 
 function _getWatchOptions(): WatcherOptions {
@@ -51,7 +53,7 @@ function _createExternalFilter(options: BauenOptions) {
 }
 
 function _createWarnHandler() {
-    const warningIgnoreList = ["CIRCULAR_DEPENDENCY", "THIS_IS_UNDEFINED"];
+    const warningIgnoreList = ["CIRCULAR_DEPENDENCY", "EMPTY_BUNDLE", "THIS_IS_UNDEFINED"];
 
     return (warning: RollupWarning, handler: WarningHandler) => {
         if (warning.code === "UNRESOLVED_IMPORT") {
@@ -60,7 +62,7 @@ function _createWarnHandler() {
 
             if (!importer || !/\?commonjs-external$/.test(importer)) {
                 console.error(`Rollup failed to resolve import "${id}" from "${importer}"`);
-                process.exit(1);
+                process.exit(-1);
             }
         }
 

@@ -10,6 +10,7 @@ export function getDefaultOptions(): BauenOptions {
         target: "node",
         extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".jsx"],
         externals: [],
+        tsConfig: "tsconfig.json",
         declaration: true,
         inlineDependencies: false
     };

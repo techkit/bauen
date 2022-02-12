@@ -13,7 +13,9 @@ export type OutputType = "cjs" | "esm";
 
 export type OutputTarget = "node" | "browser";
 
-export type PluginSWCOptions = Omit<SWCOptions, "filename">;
+export interface RollupSwcOptions extends SWCOptions {
+    extensions?: string[];
+}
 
 export interface Config {
     rootDir: string;
@@ -23,6 +25,7 @@ export interface Config {
     target: OutputTarget;
     extensions: string[];
     externals: string[];
+    tsConfig: string;
     declaration?: boolean;
     inlineDependencies?: boolean;
     onBundleStart?: () => Promise<void>;
@@ -35,6 +38,6 @@ export interface PluginsConfig {
     replace?: RollupReplaceOptions;
     alias?: RollupAliasOptions;
     resolve?: RollupNodeResolveOptions;
-    swc?: PluginSWCOptions;
+    swc?: RollupSwcOptions;
     commonjs?: RollupCommonJSOptions;
 }

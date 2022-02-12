@@ -3,10 +3,13 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import { Plugin } from "rollup";
-import swc from "unplugin-swc";
 import { BauenOptions } from "../interfaces";
+import { swc } from "../plugins";
+import { loadTsConfig } from "../utils";
 
-export function getRollupPlugins(options: BauenOptions): Plugin[] {
+export async function getRollupPlugins(options: BauenOptions): Promise<Plugin[]> {
+    const tsConfigJson = await loadTsConfig(options.rootDir, options.tsConfig);
+
     return [
         replace({
             preventAssignment: true,
@@ -23,9 +26,7 @@ export function getRollupPlugins(options: BauenOptions): Plugin[] {
             preferBuiltins: options.target === "node",
             ...options.rollupPlugins?.resolve
         }),
-        swc.rollup({
-            ...options.rollupPlugins?.swc
-        }),
+        swc(options.rootDir, tsConfigJson, options.rollupPlugins?.swc || {}),
         commonjs({
             include: [/node_modules/],
             extensions: options.extensions,

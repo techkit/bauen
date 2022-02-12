@@ -2,7 +2,7 @@ import merge from "lodash.merge";
 import Module from "module";
 import { resolve } from "pathe";
 import { BauenOptions, CliOptions, PackageJson, UserConfig } from "../interfaces";
-import { loadPackage } from "../utils";
+import { loadPackage, loadTsConfig } from "../utils";
 import { getCliOptions } from "./get-cli-options";
 import { getDefaultOptions } from "./get-default-options";
 
@@ -11,7 +11,12 @@ export async function getOptions(argv: string[], userConfig: UserConfig): Promis
     const inputOptions = { ...getCliOptions(argv), ...userConfig };
 
     const rootDir = resolve(inputOptions.rootDir || defaultOptions.rootDir);
-    const packageJson = await loadPackage(rootDir);
+    const tsConfig = resolve(rootDir, inputOptions.tsConfig || defaultOptions.tsConfig);
+
+    const [packageJson] = await Promise.all([
+        loadPackage(rootDir),
+        loadTsConfig(rootDir, tsConfig)
+    ]);
 
     return merge<BauenOptions, UserConfig & CliOptions, UserConfig>(defaultOptions, inputOptions, {
         rootDir,
