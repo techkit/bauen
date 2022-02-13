@@ -1,3 +1,10 @@
+## 0.6.1 (2022-02-13)
+
+
+### Bug Fixes
+
+* resolve parent tsconfig function changed ([6d99f2e](https://github.com/techkit/bauen/commit/6d99f2ecd9e20c63345063ab5a1b12319dd68875))
+
 # 0.6.0 (2022-02-12)
 
 
