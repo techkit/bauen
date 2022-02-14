@@ -1,5 +1,6 @@
 import alias from "@rollup/plugin-alias";
 import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import { Plugin } from "rollup";
@@ -25,6 +26,10 @@ export async function getRollupPlugins(options: BauenOptions): Promise<Plugin[]>
             exportConditions: [options.target === "node" ? "node" : "browser"],
             preferBuiltins: options.target === "node",
             ...options.rollupPlugins?.resolve
+        }),
+        json({
+            preferConst: true,
+            ...options.rollupPlugins?.json
         }),
         swc(options.rootDir, tsConfigJson, options.rollupPlugins?.swc || {}),
         commonjs({

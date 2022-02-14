@@ -1,5 +1,6 @@
 import { RollupAliasOptions } from "@rollup/plugin-alias";
 import { RollupCommonJSOptions } from "@rollup/plugin-commonjs";
+import { RollupJsonOptions } from "@rollup/plugin-json";
 import { RollupNodeResolveOptions } from "@rollup/plugin-node-resolve";
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
 import { Options as SWCOptions } from "@swc/core";
@@ -38,6 +39,7 @@ export interface PluginsConfig {
     replace?: RollupReplaceOptions;
     alias?: RollupAliasOptions;
     resolve?: RollupNodeResolveOptions;
+    json?: RollupJsonOptions;
     swc?: RollupSwcOptions;
     commonjs?: RollupCommonJSOptions;
 }
