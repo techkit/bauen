@@ -1,3 +1,10 @@
+# 0.7.0 (2022-02-14)
+
+
+### Features
+
+* rollup json plugin added ([f2faf70](https://github.com/techkit/bauen/commit/f2faf70ef460d0cfdc44fbeb249397757705eda0))
+
 ## 0.6.1 (2022-02-13)
 
 
