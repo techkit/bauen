@@ -34,6 +34,7 @@ function _getExternals(userConfig: UserConfig, packageJson: PackageJson) {
     return [
         ...Module.builtinModules,
         ...Object.keys(packageJson.dependencies || []),
-        ...Object.keys(packageJson.peerDependencies || [])
+        ...Object.keys(packageJson.peerDependencies || []),
+        ...(userConfig.externals || [])
     ];
 }
