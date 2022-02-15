@@ -1,3 +1,10 @@
+## 0.7.1 (2022-02-15)
+
+
+### Bug Fixes
+
+* user externals added to build options ([5bab03d](https://github.com/techkit/bauen/commit/5bab03d0d5129aca03d04d08f933e36a31875a01))
+
 # 0.7.0 (2022-02-14)
 
 
