@@ -7,8 +7,8 @@ const outputMapping = new Map<string, OutputOptions>();
 export const getRollupOutput = (id: string) => outputMapping.get(id);
 
 export function getRollupOutputs(options: BauenOptions): OutputOptions[] {
-    _registerDefaultOutputs(options.outDir);
-    return options.outputs.map(out => _resolveOutput(out));
+    _registerDefaultOutputs();
+    return options.outputs.map(out => _resolveOutput(out, options.outDir));
 }
 
 export function registerOutput(id: string, output: OutputOptions, force?: boolean) {
@@ -17,9 +17,8 @@ export function registerOutput(id: string, output: OutputOptions, force?: boolea
     }
 }
 
-function _registerDefaultOutputs(outDir: string) {
+function _registerDefaultOutputs() {
     const cjsOutput = defineOutput({
-        dir: outDir,
         entryFileNames: "[name].cjs",
         chunkFileNames: "chunks/[hash].cjs",
         format: "cjs",
@@ -30,7 +29,6 @@ function _registerDefaultOutputs(outDir: string) {
     });
 
     const esmOutput = defineOutput({
-        dir: outDir,
         entryFileNames: "[name].mjs",
         chunkFileNames: "chunks/[hash].mjs",
         format: "esm",
@@ -41,7 +39,6 @@ function _registerDefaultOutputs(outDir: string) {
     });
 
     const dtsOutput = defineOutput({
-        dir: outDir,
         format: "esm"
     });
 
@@ -50,15 +47,17 @@ function _registerDefaultOutputs(outDir: string) {
     registerOutput("__dts__", dtsOutput);
 }
 
-function _resolveOutput(output: OutputType | OutputOptions) {
+function _resolveOutput(output: OutputType | OutputOptions, outDir: string) {
     if (typeof output !== "string") {
         return output;
     }
 
-    if (!outputMapping.has(output)) {
+    const option = outputMapping.get(output);
+
+    if (!option) {
         console.error(`${output} output type is not registered`);
         process.exit(1);
     }
 
-    return outputMapping.get(output) as OutputOptions;
+    return Object.assign({ dir: outDir }, option);
 }
