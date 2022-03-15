@@ -1,3 +1,4 @@
+import { resolve } from "pathe";
 import { OutputOptions } from "rollup";
 import { BauenOptions, OutputType } from "../interfaces";
 import { defineOutput } from "../utils";
@@ -7,8 +8,8 @@ const outputMapping = new Map<string, OutputOptions>();
 export const getRollupOutput = (id: string) => outputMapping.get(id);
 
 export function getRollupOutputs(options: BauenOptions): OutputOptions[] {
-    _registerDefaultOutputs();
-    return options.outputs.map(out => _resolveOutput(out, options.outDir));
+    _registerDefaultOutputs(options.outDir);
+    return options.outputs.map(out => _resolveOutput(options, out));
 }
 
 export function registerOutput(id: string, output: OutputOptions, force?: boolean) {
@@ -17,8 +18,9 @@ export function registerOutput(id: string, output: OutputOptions, force?: boolea
     }
 }
 
-function _registerDefaultOutputs() {
+function _registerDefaultOutputs(outDir: string) {
     const cjsOutput = defineOutput({
+        dir: outDir,
         entryFileNames: "[name].cjs",
         chunkFileNames: "chunks/[hash].cjs",
         format: "cjs",
@@ -29,6 +31,7 @@ function _registerDefaultOutputs() {
     });
 
     const esmOutput = defineOutput({
+        dir: outDir,
         entryFileNames: "[name].mjs",
         chunkFileNames: "chunks/[hash].mjs",
         format: "esm",
@@ -39,6 +42,7 @@ function _registerDefaultOutputs() {
     });
 
     const dtsOutput = defineOutput({
+        dir: outDir,
         format: "esm"
     });
 
@@ -47,17 +51,16 @@ function _registerDefaultOutputs() {
     registerOutput("__dts__", dtsOutput);
 }
 
-function _resolveOutput(output: OutputType | OutputOptions, outDir: string) {
+function _resolveOutput(options: BauenOptions, output: OutputType | OutputOptions) {
     if (typeof output !== "string") {
-        return output;
+        const outDir = resolve(options.rootDir, output.dir || "");
+        return Object.assign(output, { dir: outDir });
     }
 
-    const option = outputMapping.get(output);
-
-    if (!option) {
+    if (!outputMapping.has(output)) {
         console.error(`${output} output type is not registered`);
         process.exit(1);
     }
 
-    return Object.assign({ dir: outDir }, option);
+    return outputMapping.get(output) as OutputOptions;
 }
