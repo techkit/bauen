@@ -1,4 +1,11 @@
-## 0.7.1 (2022-02-15)
+
+
+## 0.7.2 (2022-03-15)
+
+
+### Bug Fixes
+
+* resolve out dir dynamically from outputs ([43d47d9](https://github.com/techkit/bauen/commit/43d47d9ef84c836b9fc161bcd4063a92973d23c8))## 0.7.1 (2022-02-15)
 
 
 ### Bug Fixes
@@ -70,4 +77,3 @@
 * config name changed ([efa7e68](https://github.com/techkit/bauen/commit/efa7e688103b713da5406150c645926c8f591e45))
 
 ## 0.0.1 (2022-01-30)
-
