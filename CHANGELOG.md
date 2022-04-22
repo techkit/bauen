@@ -1,5 +1,12 @@
 
 
+## 0.8.5 (2022-04-22)
+
+
+### Bug Fixes
+
+* esbuild parse excludes commented ([0e4a3ca](https://github.com/techkit/bauen/commit/0e4a3ca2b87185e358703db7bc62de95cbfb7170))
+
 ## 0.8.4 (2022-04-22)
 
 ## 0.8.3 (2022-04-22)
