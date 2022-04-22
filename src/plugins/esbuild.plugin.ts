@@ -11,12 +11,12 @@ export function esbuild(options: BauenOptions, tsConfig: TsConfig) {
 function _getEsbuildOptions(options: BauenOptions, tsConfig: TsConfig) {
     const esbuildOptions = options.rollupPlugins?.esbuild || {};
     const compilerOptions = tsConfig?.compilerOptions;
-    const excludes = parseExclude(tsConfig.exclude);
+    // const excludes = parseExclude(tsConfig.exclude);
     const jsx = compilerOptions?.jsx || "preserve";
 
     const defaultOptions: RollupEsbuildOptions = {
         include: esbuildOptions.include || /\.[jt]sx?$/,
-        exclude: excludes,
+        exclude: /node_modules/,
         sourceMap: compilerOptions?.sourceMap,
         minify: esbuildOptions.minify ?? process.env.NODE_ENV === "production",
         target: compilerOptions?.target as any,
@@ -29,6 +29,7 @@ function _getEsbuildOptions(options: BauenOptions, tsConfig: TsConfig) {
     return merge(defaultOptions, esbuildOptions) as RollupEsbuildOptions;
 }
 
-function parseExclude(excludes: string[] = ["node_modules"]) {
-    return excludes.map(exclude => new RegExp(exclude));
-}
+// TODO: Transform tsconfig globs to regexp
+// function parseExclude(excludes: string[] = ["node_modules"]) {
+//     return excludes.map(exclude => new RegExp(exclude));
+// }
