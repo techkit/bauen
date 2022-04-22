@@ -1,5 +1,12 @@
 
 
+## 0.8.7 (2022-04-22)
+
+
+### Bug Fixes
+
+* js output type added to config interface ([f79cfb8](https://github.com/techkit/bauen/commit/f79cfb82d196ce4c97af1868f694e96d37f4f58b))
+
 ## 0.8.6 (2022-04-22)
 
 ## 0.8.5 (2022-04-22)
