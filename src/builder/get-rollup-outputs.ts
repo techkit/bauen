@@ -23,6 +23,17 @@ export function registerOutput(id: string, output: OutputOptions, force?: boolea
 }
 
 function _registerDefaultOutputs(outDir: string) {
+    const jsOutput = defineOutput({
+        dir: outDir,
+        entryFileNames: "[name].js",
+        chunkFileNames: "chunks/[hash].js",
+        format: "cjs",
+        exports: "auto",
+        preferConst: true,
+        externalLiveBindings: false,
+        freeze: false
+    });
+
     const cjsOutput = defineOutput({
         dir: outDir,
         entryFileNames: "[name].cjs",
@@ -50,6 +61,7 @@ function _registerDefaultOutputs(outDir: string) {
         format: "esm"
     });
 
+    registerOutput("js", jsOutput);
     registerOutput("cjs", cjsOutput);
     registerOutput("esm", esmOutput);
     registerOutput("__dts__", dtsOutput);
