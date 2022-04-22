@@ -32,8 +32,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Docs build
-        run: npm run docs:build
+      # - name: Docs build
+      #   run: npm run docs:build
 
       # - name: Test
       #   run: npm run test
