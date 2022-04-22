@@ -11,7 +11,7 @@ export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
 export type UserConfig = DeepPartial<Config>;
 
-export type OutputType = "cjs" | "esm";
+export type OutputType = "js" | "cjs" | "esm";
 
 export type OutputTarget = "node" | "browser";
 
