@@ -4,7 +4,8 @@ import { RollupJsonOptions } from "@rollup/plugin-json";
 import { RollupNodeResolveOptions } from "@rollup/plugin-node-resolve";
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
 import { Options as SWCOptions } from "@swc/core";
-import { OutputOptions, RollupOptions } from "rollup";
+import { OutputOptions, Plugin, RollupOptions } from "rollup";
+import { Options as RollupEsbuildOptions } from "rollup-plugin-esbuild";
 
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
@@ -13,6 +14,8 @@ export type UserConfig = DeepPartial<Config>;
 export type OutputType = "cjs" | "esm";
 
 export type OutputTarget = "node" | "browser";
+
+export type SyntaxParser = "swc" | "esbuild";
 
 export interface RollupSwcOptions extends SWCOptions {
     extensions?: string[];
@@ -27,12 +30,15 @@ export interface Config {
     extensions: string[];
     externals: string[];
     tsConfig: string;
+    parser?: SyntaxParser;
     declaration?: boolean;
+    preserveModules?: boolean;
     inlineDependencies?: boolean;
     onBundleStart?: () => Promise<void>;
     onBundleEnd?: () => Promise<void>;
     rollupOptions?: RollupOptions;
     rollupPlugins?: PluginsConfig;
+    mapRollupPlugins?: (plugins: Plugin[]) => Plugin[];
 }
 
 export interface PluginsConfig {
@@ -41,5 +47,6 @@ export interface PluginsConfig {
     resolve?: RollupNodeResolveOptions;
     json?: RollupJsonOptions;
     swc?: RollupSwcOptions;
+    esbuild?: RollupEsbuildOptions;
     commonjs?: RollupCommonJSOptions;
 }

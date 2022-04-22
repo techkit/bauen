@@ -11,7 +11,9 @@ export function getDefaultOptions(): BauenOptions {
         extensions: [".ts", ".tsx", ".mjs", ".cjs", ".js", ".jsx"],
         externals: [],
         tsConfig: "tsconfig.json",
+        parser: "esbuild",
         declaration: true,
-        inlineDependencies: false
+        inlineDependencies: false,
+        mapRollupPlugins: plugins => plugins
     };
 }

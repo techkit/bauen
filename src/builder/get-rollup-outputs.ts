@@ -1,3 +1,4 @@
+import merge from "lodash.merge";
 import { resolve } from "pathe";
 import { OutputOptions } from "rollup";
 import { BauenOptions, OutputType } from "../interfaces";
@@ -5,7 +6,10 @@ import { defineOutput } from "../utils";
 
 const outputMapping = new Map<string, OutputOptions>();
 
-export const getRollupOutput = (id: string) => outputMapping.get(id);
+export function getRollupOutput(id: string, preserveModules = false) {
+    const _output = outputMapping.get(id) as OutputOptions;
+    return merge(_output, { preserveModules });
+}
 
 export function getRollupOutputs(options: BauenOptions): OutputOptions[] {
     _registerDefaultOutputs(options.outDir);
@@ -54,7 +58,8 @@ function _registerDefaultOutputs(outDir: string) {
 function _resolveOutput(options: BauenOptions, output: OutputType | OutputOptions) {
     if (typeof output !== "string") {
         const outDir = resolve(options.rootDir, output.dir || "");
-        return Object.assign(output, { dir: outDir });
+        const assigns: OutputOptions = { dir: outDir };
+        return merge(output, assigns);
     }
 
     if (!outputMapping.has(output)) {
@@ -62,5 +67,5 @@ function _resolveOutput(options: BauenOptions, output: OutputType | OutputOption
         process.exit(1);
     }
 
-    return outputMapping.get(output) as OutputOptions;
+    return getRollupOutput(output, options.preserveModules);
 }

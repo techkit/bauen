@@ -4,15 +4,12 @@ import { existsSync } from "fs";
 import merge from "lodash.merge";
 import { dirname, join, resolve } from "pathe";
 import { Plugin as RollupPlugin } from "rollup";
-import { RollupSwcOptions, TsConfig } from "../interfaces";
+import { BauenOptions, RollupSwcOptions, TsConfig } from "../interfaces";
 
-export function swc(
-    rootDir: string,
-    tsConfig: TsConfig,
-    options: RollupSwcOptions = {}
-): RollupPlugin {
+export function swc(options: BauenOptions, tsConfig: TsConfig): RollupPlugin {
+    const swcOptions = options.rollupPlugins?.swc || {};
     const filter = createFilter(/\.[jt]sx?$/, /node_modules/);
-    const pathResolver = _createPathResolver(rootDir, options.extensions);
+    const pathResolver = _createPathResolver(options.rootDir, swcOptions.extensions);
 
     return {
         name: "swc",
@@ -30,8 +27,8 @@ export function swc(
                 return null;
             }
 
-            const swcOptions = _getSwcOptions(id, tsConfig, options);
-            const transformed = await transform(code, swcOptions);
+            const _swcOptions = _getSwcOptions(id, tsConfig, swcOptions);
+            const transformed = await transform(code, _swcOptions);
 
             return {
                 code: transformed.code,
@@ -39,7 +36,7 @@ export function swc(
             };
         },
         async renderChunk(code, chunk) {
-            if (!options.minify) {
+            if (!swcOptions.minify) {
                 return null;
             }
 
