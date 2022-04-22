@@ -1,5 +1,12 @@
 
 
+# 0.8.0 (2022-04-22)
+
+
+### Features
+
+* esbuild, preserve modules and map plugins support added ([af22291](https://github.com/techkit/bauen/commit/af222919da73e645091a844dc76faf9067ffcd16))
+
 ## 0.7.2 (2022-03-15)
 
 
