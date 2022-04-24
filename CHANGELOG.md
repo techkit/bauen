@@ -1,5 +1,12 @@
 
 
+# 0.9.0 (2022-04-24)
+
+
+### Features
+
+* merge config util created ([b166396](https://github.com/techkit/bauen/commit/b1663961899202fb0af0aec68764c9aed70c4623))
+
 ## 0.8.7 (2022-04-22)
 
 
