@@ -13,7 +13,6 @@ export function getDefaultOptions(): BauenOptions {
         tsConfig: "tsconfig.json",
         parser: "esbuild",
         declaration: true,
-        inlineDependencies: false,
-        mapRollupPlugins: plugins => plugins
+        inlineDependencies: false
     };
 }
