@@ -1,5 +1,12 @@
 
 
+## 0.10.3 (2022-05-01)
+
+
+### Bug Fixes
+
+* run plugin enabled only on watch mode ([0940831](https://github.com/techkit/bauen/commit/09408316fde3b041a32f974e75e370495b714e02))
+
 ## 0.10.2 (2022-05-01)
 
 ## 0.10.1 (2022-05-01)

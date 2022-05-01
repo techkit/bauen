@@ -1,6 +1,6 @@
 {
     "name": "bauen",
-    "version": "0.10.2",
+    "version": "0.10.3",
     "license": "MIT",
     "description": "A javascript build system for libraries",
     "repository": "git@github.com:techkit/bauen.git",
