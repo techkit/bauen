@@ -1,5 +1,12 @@
 
 
+## 0.10.1 (2022-05-01)
+
+
+### Bug Fixes
+
+* raw plugin include pattern added and dts options removed ([b666d0e](https://github.com/techkit/bauen/commit/b666d0e8052a775e4a2a485ed9a4891ef0d14818))
+
 # 0.10.0 (2022-05-01)
 
 
