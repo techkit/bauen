@@ -5,7 +5,7 @@ import { getRollupOutputs } from "./get-rollup-outputs";
 import { getRollupPlugins } from "./get-rollup-plugins";
 
 export async function getRollupOptions(options: BauenOptions, watch?: boolean) {
-    const rollupPlugins = await getRollupPlugins(options);
+    const rollupPlugins = await getRollupPlugins(options, watch);
 
     const defaultOptions: RollupOptions = {
         context: options.rootDir,

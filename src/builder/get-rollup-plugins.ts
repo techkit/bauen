@@ -9,17 +9,18 @@ import { BauenOptions, TsConfig } from "../interfaces";
 import { esbuild, raw, swc } from "../plugins";
 import { loadTsConfig } from "../utils";
 
-export async function getRollupPlugins(options: BauenOptions) {
-    const defaultPlugins = await getDefaultPlugins(options);
+export async function getRollupPlugins(options: BauenOptions, watch?: boolean) {
+    const defaultPlugins = await getDefaultPlugins(options, watch);
 
     return typeof options.mapRollupPlugins === "function"
         ? options.mapRollupPlugins(defaultPlugins)
         : defaultPlugins;
 }
 
-async function getDefaultPlugins(options: BauenOptions) {
+async function getDefaultPlugins(options: BauenOptions, watch?: boolean) {
     const tsConfigJson = await loadTsConfig(options.rootDir, options.tsConfig);
     const syntaxParser = resolveSyntaxParser(options, tsConfigJson);
+    const runEnabled = watch && options.run;
 
     return <Plugin[]>[
         replace({
@@ -54,7 +55,7 @@ async function getDefaultPlugins(options: BauenOptions) {
             exclude: [],
             ...options.rollupPlugins?.raw
         }),
-        options.run &&
+        runEnabled &&
             run({
                 ...options.rollupPlugins?.run
             })
