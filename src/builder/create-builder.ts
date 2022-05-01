@@ -17,12 +17,7 @@ export async function createBuilder(options: BauenOptions, rollupOptions: Rollup
     }
 
     if (options.declaration) {
-        rollupOptions.plugins?.push(
-            dts({
-                compilerOptions: { preserveSymlinks: false },
-                respectExternal: true
-            })
-        );
+        rollupOptions.plugins?.push(dts({}));
         const typesBuild = await rollup(rollupOptions);
         const typesOutput = getRollupOutput("__dts__", options.preserveModules) as OutputOptions;
         const typesWritter = typesBuild.write(typesOutput);

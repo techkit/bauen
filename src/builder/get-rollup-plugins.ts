@@ -50,6 +50,8 @@ async function getDefaultPlugins(options: BauenOptions) {
             ...options.rollupPlugins?.commonjs
         }),
         raw({
+            include: [/\.(md|txt)$/],
+            exclude: [],
             ...options.rollupPlugins?.raw
         }),
         options.run &&
