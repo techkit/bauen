@@ -5,7 +5,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import { Plugin } from "rollup";
 import { BauenOptions, TsConfig } from "../interfaces";
-import { esbuild, swc } from "../plugins";
+import { esbuild, raw, swc } from "../plugins";
 import { loadTsConfig } from "../utils";
 
 export async function getRollupPlugins(options: BauenOptions) {
@@ -46,6 +46,9 @@ async function getDefaultPlugins(options: BauenOptions) {
             extensions: options.extensions,
             requireReturnsDefault: "namespace",
             ...options.rollupPlugins?.commonjs
+        }),
+        raw({
+            ...options.rollupPlugins?.raw
         })
     ];
 }

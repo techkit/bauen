@@ -3,6 +3,7 @@ import { RollupCommonJSOptions } from "@rollup/plugin-commonjs";
 import { RollupJsonOptions } from "@rollup/plugin-json";
 import { RollupNodeResolveOptions } from "@rollup/plugin-node-resolve";
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
+import { FilterPattern } from "@rollup/pluginutils";
 import { Options as SWCOptions } from "@swc/core";
 import { OutputOptions, Plugin, RollupOptions } from "rollup";
 import { Options as RollupEsbuildOptions } from "rollup-plugin-esbuild";
@@ -19,6 +20,11 @@ export type SyntaxParser = "swc" | "esbuild";
 
 export interface RollupSwcOptions extends SWCOptions {
     extensions?: string[];
+}
+
+export interface RollupRawOptions {
+    include?: FilterPattern;
+    exclude?: FilterPattern;
 }
 
 export interface Config {
@@ -47,6 +53,7 @@ export interface PluginsConfig {
     resolve?: RollupNodeResolveOptions;
     json?: RollupJsonOptions;
     swc?: RollupSwcOptions;
+    raw?: RollupRawOptions;
     esbuild?: RollupEsbuildOptions;
     commonjs?: RollupCommonJSOptions;
 }

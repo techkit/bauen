@@ -1,5 +1,5 @@
 import { createFilter } from "@rollup/pluginutils";
-import { transform } from "@swc/core";
+import { JscTarget, transform } from "@swc/core";
 import { existsSync } from "fs";
 import merge from "lodash.merge";
 import { dirname, join, resolve } from "pathe";
@@ -79,11 +79,14 @@ function _getSwcOptions(id: string, tsConfig: TsConfig, options: RollupSwcOption
     const isTsFile = /\.tsx?$/.test(id);
     const compilerOptions = tsConfig?.compilerOptions;
 
+    const moduleTarget = compilerOptions?.target?.toString().toLowerCase() as JscTarget;
+
     const defaultOptions: RollupSwcOptions = {
         filename: id,
-        sourceMaps: true,
+        sourceMaps: compilerOptions?.sourceMap,
         jsc: {
             keepClassNames: compilerOptions?.experimentalDecorators,
+            target: moduleTarget,
             parser: {
                 syntax: isTsFile ? "typescript" : "ecmascript",
                 tsx: isTsFile,
