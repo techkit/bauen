@@ -33,6 +33,7 @@ function _getExternals(userConfig: UserConfig, packageJson: PackageJson) {
 
     return [
         ...Module.builtinModules,
+        ...Module.builtinModules.map(mod => `node:${mod}`),
         ...Object.keys(packageJson.dependencies || []),
         ...Object.keys(packageJson.peerDependencies || []),
         ...(userConfig.externals || [])

@@ -40,13 +40,18 @@ function _createExternalFilter(options: BauenOptions) {
         const packageName = _getPackageName(id);
         const isExternal = options.externals.includes(packageName);
 
-        if (options.inlineDependencies || id.startsWith(".") || id.startsWith("/")) {
-            return false;
+        if (isExternal) {
+            return true;
         }
 
-        // if (!isExternal) {
-        //     console.warn(`Inlining implicit external ${id}`);
-        // }
+        if (
+            options.inlineDependencies ||
+            id.startsWith(".") ||
+            id.startsWith("/") ||
+            id.match(/src[\\/]/)
+        ) {
+            return false;
+        }
 
         return isExternal;
     };

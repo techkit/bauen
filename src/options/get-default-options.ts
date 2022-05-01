@@ -12,6 +12,7 @@ export function getDefaultOptions(): BauenOptions {
         externals: [],
         tsConfig: "tsconfig.json",
         parser: "esbuild",
+        run: false,
         declaration: true,
         inlineDependencies: false
     };

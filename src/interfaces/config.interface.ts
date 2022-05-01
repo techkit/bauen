@@ -3,6 +3,7 @@ import { RollupCommonJSOptions } from "@rollup/plugin-commonjs";
 import { RollupJsonOptions } from "@rollup/plugin-json";
 import { RollupNodeResolveOptions } from "@rollup/plugin-node-resolve";
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
+import { RollupRunOptions } from "@rollup/plugin-run";
 import { FilterPattern } from "@rollup/pluginutils";
 import { Options as SWCOptions } from "@swc/core";
 import { OutputOptions, Plugin, RollupOptions } from "rollup";
@@ -38,6 +39,7 @@ export interface Config {
     tsConfig: string;
     parser?: SyntaxParser;
     declaration?: boolean;
+    run?: boolean;
     preserveModules?: boolean;
     inlineDependencies?: boolean;
     onBundleStart?: () => Promise<void>;
@@ -54,6 +56,7 @@ export interface PluginsConfig {
     json?: RollupJsonOptions;
     swc?: RollupSwcOptions;
     raw?: RollupRawOptions;
+    run?: RollupRunOptions;
     esbuild?: RollupEsbuildOptions;
     commonjs?: RollupCommonJSOptions;
 }

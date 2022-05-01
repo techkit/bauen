@@ -3,6 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
+import run from "@rollup/plugin-run";
 import { Plugin } from "rollup";
 import { BauenOptions, TsConfig } from "../interfaces";
 import { esbuild, raw, swc } from "../plugins";
@@ -18,7 +19,7 @@ export async function getRollupPlugins(options: BauenOptions) {
 
 async function getDefaultPlugins(options: BauenOptions) {
     const tsConfigJson = await loadTsConfig(options.rootDir, options.tsConfig);
-    const resolveParser = resolveSyntaxParser(options, tsConfigJson);
+    const syntaxParser = resolveSyntaxParser(options, tsConfigJson);
 
     return <Plugin[]>[
         replace({
@@ -40,16 +41,21 @@ async function getDefaultPlugins(options: BauenOptions) {
             preferConst: true,
             ...options.rollupPlugins?.json
         }),
-        resolveParser(),
+        syntaxParser(),
         commonjs({
             include: [/node_modules/],
             extensions: options.extensions,
+            ignoreTryCatch: true,
             requireReturnsDefault: "namespace",
             ...options.rollupPlugins?.commonjs
         }),
         raw({
             ...options.rollupPlugins?.raw
-        })
+        }),
+        options.run &&
+            run({
+                ...options.rollupPlugins?.run
+            })
     ];
 }
 
