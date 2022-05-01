@@ -1,5 +1,12 @@
 
 
+# 0.10.0 (2022-05-01)
+
+
+### Features
+
+* raw plugin added ([62c19f4](https://github.com/techkit/bauen/commit/62c19f4c0f64c23ab0995487245f42e5f9a5bade))
+
 # 0.9.0 (2022-04-24)
 
 
