@@ -22,6 +22,7 @@ export interface PackageJson {
     types?: string;
     type?: PackageJsonType;
     bin?: PackageJsonBinTable | string;
+    workspaces?: string[];
     scripts?: PackageJsonScriptTable;
     dependencies?: PackageJsonDependencyTable;
     optionalDependencies?: PackageJsonDependencyTable;
