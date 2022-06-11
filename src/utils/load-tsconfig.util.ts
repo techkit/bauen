@@ -1,4 +1,5 @@
 import { readFile } from "fs/promises";
+import merge from "lodash.merge";
 import { basename, dirname, resolve } from "pathe";
 import { TsConfig } from "../interfaces";
 
@@ -12,7 +13,7 @@ export async function loadTsConfig(rootDir: string, filename: string) {
     if (typeof tsConfig.extends === "string") {
         const filepath = resolve(dirname(resolved), tsConfig.extends);
         const parent = await loadTsConfig(dirname(filepath), basename(filepath));
-        tsConfig.compilerOptions = Object.assign(parent.compilerOptions, tsConfig.compilerOptions);
+        tsConfig.compilerOptions = merge(parent.compilerOptions || {}, tsConfig.compilerOptions);
     }
 
     return tsConfig;

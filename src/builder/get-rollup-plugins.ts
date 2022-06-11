@@ -5,8 +5,8 @@ import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import run from "@rollup/plugin-run";
 import { Plugin } from "rollup";
-import { BauenOptions, TsConfig } from "../interfaces";
-import { esbuild, raw, swc } from "../plugins";
+import { BauenOptions, SyntaxParser, TsConfig } from "../interfaces";
+import { esbuild, raw, swc, typescript } from "../plugins";
 import { loadTsConfig } from "../utils";
 
 export async function getRollupPlugins(options: BauenOptions, watch?: boolean) {
@@ -63,13 +63,17 @@ async function getDefaultPlugins(options: BauenOptions, watch?: boolean) {
 }
 
 function resolveSyntaxParser(options: BauenOptions, tsConfigJson: TsConfig) {
-    return () => {
-        switch (options.parser) {
-            case "swc":
-                return swc(options, tsConfigJson);
+    const factory = _resolveParserFactory(options.parser);
+    return () => factory(options, tsConfigJson);
+}
 
-            default:
-                return esbuild(options, tsConfigJson);
-        }
-    };
+function _resolveParserFactory(parser?: SyntaxParser) {
+    switch (parser) {
+        case "swc":
+            return swc;
+        case "typescript":
+            return typescript;
+        default:
+            return esbuild;
+    }
 }

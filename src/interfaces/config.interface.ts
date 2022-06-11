@@ -8,6 +8,7 @@ import { FilterPattern } from "@rollup/pluginutils";
 import { Options as SWCOptions } from "@swc/core";
 import { OutputOptions, Plugin, RollupOptions } from "rollup";
 import { Options as RollupEsbuildOptions } from "rollup-plugin-esbuild";
+import { RPT2Options } from "rollup-plugin-typescript2";
 
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
@@ -17,7 +18,7 @@ export type OutputType = "js" | "cjs" | "esm";
 
 export type OutputTarget = "node" | "browser";
 
-export type SyntaxParser = "swc" | "esbuild";
+export type SyntaxParser = "swc" | "esbuild" | "typescript";
 
 export interface RollupSwcOptions extends SWCOptions {
     extensions?: string[];
@@ -27,6 +28,8 @@ export interface RollupRawOptions {
     include?: FilterPattern;
     exclude?: FilterPattern;
 }
+
+export type RollupTypescriptOptions = RPT2Options;
 
 export interface Config {
     rootDir: string;
@@ -59,4 +62,5 @@ export interface PluginsConfig {
     run?: RollupRunOptions;
     esbuild?: RollupEsbuildOptions;
     commonjs?: RollupCommonJSOptions;
+    typescript?: RollupTypescriptOptions;
 }
