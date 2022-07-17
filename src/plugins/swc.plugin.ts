@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createFilter } from "@rollup/pluginutils";
 import { JscTarget, transform } from "@swc/core";
 import { existsSync } from "fs";
@@ -8,8 +9,9 @@ import { BauenOptions, RollupSwcOptions, TsConfig } from "../interfaces";
 
 export function swc(options: BauenOptions, tsConfig: TsConfig): RollupPlugin {
     const swcOptions = options.rollupPlugins?.swc || {};
+    const extensions = [...options.extensions, ...(swcOptions.extensions || [])];
     const filter = createFilter(/\.[jt]sx?$/, /node_modules/);
-    const pathResolver = _createPathResolver(options.rootDir, swcOptions.extensions);
+    const pathResolver = _createPathResolver(options.rootDir, extensions);
 
     return {
         name: "swc",
@@ -80,13 +82,17 @@ function _getSwcOptions(id: string, tsConfig: TsConfig, options: RollupSwcOption
     const compilerOptions = tsConfig?.compilerOptions;
 
     const moduleTarget = compilerOptions?.target?.toString().toLowerCase() as JscTarget;
+    const pathAliases = (compilerOptions?.paths || []) as any;
 
     const defaultOptions: RollupSwcOptions = {
         filename: id,
         sourceMaps: compilerOptions?.sourceMap,
         jsc: {
-            keepClassNames: compilerOptions?.experimentalDecorators,
             target: moduleTarget,
+            baseUrl: compilerOptions?.baseUrl,
+            paths: pathAliases,
+            externalHelpers: compilerOptions?.importHelpers,
+            keepClassNames: compilerOptions?.experimentalDecorators,
             parser: {
                 syntax: isTsFile ? "typescript" : "ecmascript",
                 tsx: isTsFile,

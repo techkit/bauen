@@ -28,7 +28,8 @@
     ],
     "scripts": {
         "build": "jiti ./src/cli",
-        "release": "release-it"
+        "release": "release-it",
+        "lint": "eslint */**/*.ts --fix"
     },
     "gitHooks": {
         "commit-msg": "commitlint -e -V"
